@@ -1,7 +1,7 @@
 {
-  "name": "mfm-js",
+  "name": "tfm-js",
   "version": "0.23.3",
-  "description": "An MFM parser implementation with TypeScript",
+  "description": "An TFM parser implementation with TypeScript",
   "main": "./built/index.js",
   "types": "./built/index.d.ts",
   "scripts": {
@@ -18,9 +18,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/misskey-dev/mfm.js.git"
+    "url": "git+https://github.com/tanukey-dev/tfm.js.git"
   },
-  "author": "Marihachi",
+  "author": "tar-bin",
   "license": "MIT",
   "devDependencies": {
     "@microsoft/api-extractor": "^7.28.4",
