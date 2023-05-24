@@ -52,7 +52,7 @@ export type MfmCenter = {
 };
 export const CENTER = (children: MfmInline[]): NodeType<'center'> => { return { type: 'center', children }; };
 
-export type MfmInline = MfmUnicodeEmoji | MfmEmojiCode | MfmBold | MfmSmall | MfmItalic | MfmStrike |
+export type MfmInline = MfmUnicodeEmoji | MfmEmojiCode | MfmBold | MfmSmall | MfmItalic | MfmStrike | MfmAsciiArt |
 	MfmInlineCode | MfmMathInline | MfmMention | MfmHashtag | MfmUrl | MfmLink | MfmFn | MfmPlain | MfmText;
 
 export type MfmUnicodeEmoji = {
@@ -100,6 +100,13 @@ export type MfmStrike = {
 	children: MfmInline[];
 };
 export const STRIKE = (children: MfmInline[]): NodeType<'strike'> => { return { type: 'strike', children }; };
+
+export type MfmAsciiArt = {
+	type: 'asciiart';
+	props?: Record<string, unknown>;
+	children: MfmInline[];
+};
+export const ASCII_ART = (children: MfmInline[]): NodeType<'asciiart'> => { return { type: 'asciiart', children }; };
 
 export type MfmInlineCode = {
 	type: 'inlineCode';
@@ -201,6 +208,7 @@ export type NodeType<T extends MfmNode['type']> =
 	T extends 'small' ? MfmSmall :
 	T extends 'italic' ? MfmItalic :
 	T extends 'strike' ? MfmStrike :
+	T extends 'asciiart' ? MfmAsciiArt :
 	T extends 'inlineCode' ? MfmInlineCode :
 	T extends 'mathInline' ? MfmMathInline :
 	T extends 'mention' ? MfmMention :

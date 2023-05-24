@@ -77,6 +77,8 @@ export const language = P.createLanguage({
 			r.unicodeEmoji,
 			// "<center>" block
 			r.centerTag,
+			// "<asciiart>"
+			r.asciiartTag,
 			// "<small>"
 			r.smallTag,
 			// "<plain>"
@@ -141,6 +143,8 @@ export const language = P.createLanguage({
 		return P.alt([
 			// Regexp
 			r.unicodeEmoji,
+			// "<asciiart>"
+			r.asciiartTag,
 			// "<small>"
 			r.smallTag,
 			// "<plain>"
@@ -323,6 +327,19 @@ export const language = P.createLanguage({
 			P.alt([alphaAndNum, space]).many(1),
 			mark,
 		]).map(result => M.BOLD(mergeText(result[1] as string[])));
+	},
+
+	asciiartTag: r => {
+		const open = P.str('<asciiart>');
+		const close = P.str('</asciiart>');
+		return seqOrText([
+			open,
+			P.seq([P.notMatch(close), nest(r.inline)], 1).many(1),
+			close,
+		]).map(result => {
+			if (typeof result === 'string') return result;
+			return M.ASCII_ART(mergeText(result[1] as (M.MfmInline | string)[]));
+		});
 	},
 
 	smallTag: r => {
