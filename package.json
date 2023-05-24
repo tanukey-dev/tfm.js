@@ -1,6 +1,6 @@
 {
   "name": "tfm-js",
-  "version": "0.24.0",
+  "version": "0.24.1",
   "description": "An TFM parser implementation with TypeScript",
   "main": "./built/index.js",
   "types": "./built/index.d.ts",
