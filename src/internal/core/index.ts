@@ -117,7 +117,7 @@ export function str<T extends string>(value: T): Parser<T> {
 		if ((input.length - index) < value.length) {
 			return failure();
 		}
-		if (input.substr(index, value.length) !== value) {
+		if (input.substring(index, value.length) !== value) {
 			return failure();
 		}
 		return success(index + value.length, value);
