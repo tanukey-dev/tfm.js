@@ -332,14 +332,16 @@ export const language = P.createLanguage({
 	asciiartTag: r => {
 		const open = P.str('<asciiart>');
 		const close = P.str('</asciiart>');
-		return seqOrText([
+		return P.seq([
 			open,
-			P.seq([P.notMatch(close), nest(r.inline)], 1).many(1),
+			newLine.option(),
+			P.seq([
+				P.notMatch(P.seq([newLine.option(), close])),
+				P.char,
+			], 1).many(1).text(),
+			newLine.option(),
 			close,
-		]).map(result => {
-			if (typeof result === 'string') return result;
-			return M.ASCII_ART(mergeText(result[1] as (M.MfmInline | string)[]));
-		});
+		], 2).map(result => M.ASCII_ART(result));
 	},
 
 	smallTag: r => {

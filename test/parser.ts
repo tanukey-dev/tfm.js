@@ -276,6 +276,36 @@ hoge`;
 		});
 	});
 
+	describe.only('asciiart block', () => {
+		test('アスキーアートブロックを使用できる', () => {
+			const input = '<asciiart>\nabc\n</asciiart>';
+			const output = [mfm.ASCII_ART('abc')];
+			assert.deepStrictEqual(mfm.parse(input), output);
+		});
+
+		test('コードブロックには複数行のコードを入力できる', () => {
+			const input = '<asciiart>\na\nb\nc\n</asciiart>';
+			const output = [mfm.ASCII_ART('a\nb\nc')];
+			assert.deepStrictEqual(mfm.parse(input), output);
+		});
+
+		test('ブロックの前後にあるテキストが正しく解釈される', () => {
+			const input = 'abc\n<asciiart>\nconst abc = 1;\n</asciiart>\n123';
+			const output = [
+				TEXT('abc\n'),
+				mfm.ASCII_ART('const abc = 1;'),
+				TEXT('\n123')
+			];
+			assert.deepStrictEqual(mfm.parse(input), output);
+		});
+
+		test('ignore internal marker', () => {
+			const input = '<asciiart>\naaa<asciiart>bbb\n</asciiart>';
+			const output = [mfm.ASCII_ART('aaa<asciiart>bbb')];
+			assert.deepStrictEqual(mfm.parse(input), output);
+		});
+	});
+
 	describe('mathBlock', () => {
 		test('1行の数式ブロックを使用できる', () => {
 			const input = '\\[math1\\]';

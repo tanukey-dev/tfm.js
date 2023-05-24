@@ -103,10 +103,12 @@ export const STRIKE = (children: MfmInline[]): NodeType<'strike'> => { return { 
 
 export type MfmAsciiArt = {
 	type: 'asciiart';
-	props?: Record<string, unknown>;
-	children: MfmInline[];
+	props: {
+		text: string;
+	};
+	children?: [];
 };
-export const ASCII_ART = (children: MfmInline[]): NodeType<'asciiart'> => { return { type: 'asciiart', children }; };
+export const ASCII_ART = (value: string): NodeType<'asciiart'> => { return { type: 'asciiart', props: { text: value } }; };
 
 export type MfmInlineCode = {
 	type: 'inlineCode';

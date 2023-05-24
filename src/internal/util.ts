@@ -91,7 +91,7 @@ export function stringifyNode(node: MfmNode): string {
 			}
 		}
 		case 'asciiart': {
-			return `<asciiart>${ stringifyTree(node.children) }</asciiart>`;
+			return `${ node.props.text }`;
 		}
 		case 'link': {
 			const prefix = node.props.silent ? '?' : '';
